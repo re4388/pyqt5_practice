@@ -24,6 +24,7 @@ If you happen to come here, only check project-promodoro as a valid reference fo
       - DragDrop.py and its Ui file
   - backup folder is just like its name said
   - play-around-file folder is just like its name said
+  - You need to have [Calibre](https://calibre-ebook.com/) installed to use the e-pub to mobi converter.
 
 ## How to run the main project
 
