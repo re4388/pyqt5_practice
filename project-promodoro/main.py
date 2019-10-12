@@ -1,7 +1,18 @@
+# import python BIF
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication
+
+# import QT
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+
+# from PyQt5.QtWidgets import QMainWindow, QApplication
+# from PyQt5 import QtCore
+
+# import UI
 from Ui_main import Ui_MainWindow
-from PyQt5 import QtCore
+
+# import other app
 import Promodoro
 import DragDrop
 
@@ -30,7 +41,17 @@ class AppWindow(QMainWindow):
         app.aboutQt()
 
 
-app = QApplication(sys.argv)
-w = AppWindow()
-w.show()
-sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    
+    app = QApplication(sys.argv)
+
+    app.setStyle("Fusion")
+    # palette = QPalette()
+    # palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    # palette.setColor(QPalette.WindowText, Qt.white)
+    # app.setPalette(palette)
+
+    w = AppWindow()
+    w.show()
+    sys.exit(app.exec_())
