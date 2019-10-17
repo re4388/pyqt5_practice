@@ -2,9 +2,7 @@
 
 # from os import listdir, rename
 from os.path import join
-import subprocess
-import traceback
-import sys
+import subprocess, traceback, sys, re, os
 
 
 from PyQt5.QtGui import *
@@ -104,6 +102,7 @@ class dropArea(QWidget):
         self.showDropTextTitle.setAlignment(Qt.AlignTop | Qt.AlignLeft)
         self.showDropTextTitle.setTextFormat(1)
 
+        # show log label
         self.showDropText = QLabel('wait to process', self)
         self.showDropText.move(50, 40)
         self.showDropText.resize(400, 400)
@@ -124,20 +123,22 @@ class dropArea(QWidget):
         else:
             event.ignore()
 
-    def get_final_filename(self, f):
-        # slit up and get the part excluding extention
-        f = f.split(".")
-        filename = ".".join(f[0:-1])
 
-        # add new extension
-        processed_file_name = filename+".mobi"
-        return processed_file_name
+    def get_final_path(self,filePath):
+        file_name_pattern = re.compile(r'([^\/]+)(.epub)$')
+        pattern_list = file_name_pattern.findall(filePath)
+        source_file_name = pattern_list[0][0]
+        dest_file_name = source_file_name + '.mobi'
+        # new_path = "C:\\Users\\muen_infs\\Desktop\\" + dest_file_name
+        new_path = os.getenv("HOME") + "\\" + dest_file_name
+        print(new_path)
+        return new_path
 
-    def converFile(self, original_filename, progress_callback):
-        new_file = self.get_final_filename(original_filename)
+    def converFile(self, filepath, progress_callback):
+        new_file = self.get_final_path(filepath)
         try:
             proc = subprocess.Popen(
-                ['ebook-convert', 'test.epub', 'test.mobi'], stdout=subprocess.PIPE)
+                ['ebook-convert', filepath, new_file], stdout=subprocess.PIPE, shell=True)
             while True:
                 line = proc.stdout.readline()
                 if not line:
