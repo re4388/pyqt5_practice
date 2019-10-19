@@ -100,10 +100,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with open('data.db', 'w') as f:
             data = json.dump(self.model.todos, f)
 
-
-app = QtWidgets.QApplication(sys.argv)
-window = MainWindow()
-window.show()
-app.exec_()
-# sys.exit(app.exec_())
-
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())

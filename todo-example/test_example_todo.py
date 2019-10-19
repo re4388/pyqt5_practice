@@ -1,13 +1,15 @@
-from PyQt5 import QtCore
 from exmaple_todo import MainWindow
+from time import sleep
 
 
-def test_hello(qtbot):
+def test_myapp(qtbot):
     window = MainWindow()
     window.show()
     qtbot.addWidget(window)
+    sleep(3)
 
-    # click in the Greet button and make sure it updates the appropriate label
-    qtbot.mouseClick(window.addButton, QtCore.Qt.LeftButton)
-
-    assert window.greet_label.text() == 'Hello!'
+    window.todoEdit.clear()
+    qtbot.keyClicks(window.todoEdit, 'todo-Test')
+    # qtbot.mouseClick(window.addButton, Qt.LeftButton)
+    assert window.todoEdit.text() == 'todo-Test'
+    # qtbot.stopForInteraction()
